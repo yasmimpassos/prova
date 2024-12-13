@@ -66,25 +66,25 @@ void setup() {
 
   if (WiFi.status() == WL_CONNECTED) { // Se o ESP32 estiver conectado à Internet
 
-    String serverPath = "http://www.google.com.br/"; // Endpoint da requisição HTTP
+    String endpoint = "http://www.google.com.br/"; // Endpoint da requisição HTTP
 
-    http.begin(serverPath.c_str());
+    http.begin(endpoint.c_str());
 
-    int httpResponseCode = http.GET(); // Código do Resultado da Requisição HTTP
+    int codigoRequisicao = http.GET(); // Código do Resultado da Requisição HTTP
 
-    if (httpResponseCode > 0) {
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpResponseCode);
+    if (codigoRequisicao > 0) {
+      Serial.print("HTTP codigo retornado: ");
+      Serial.println(codigoRequisicao);
     }
     else {
-      Serial.print("Error code: ");
-      Serial.println(httpResponseCode);
+      Serial.print("Codigo de erro:");
+      Serial.println(codigoRequisicao);
     }
     http.end();
   }
 
   else {
-    Serial.println("WiFi Disconnected");
+    Serial.println("WiFi Disconectado");
   }
 }
 
@@ -140,14 +140,14 @@ void loop() {
 
         if (contagem_botao == 3) {
           Serial.println("Alerta");
-          int httpResponseCode = http.POST("ALERTA"); // publica a informação http
-          if (httpResponseCode > 0) {
-            Serial.print("HTTP Response code: ");
-            Serial.println(httpResponseCode);
+          int codigoRequisicao = http.POST("ALERTA"); // publica a informação http
+          if (codigoRequisicao > 0) {
+            Serial.print("HTTP codigo retornado: ");
+            Serial.println(codigoRequisicao);
           }
           else {
-            Serial.print("Error code: ");
-            Serial.println(httpResponseCode);
+            Serial.print("Codigo de erro:");
+            Serial.println(codigoRequisicao);
           }
         }
       }
